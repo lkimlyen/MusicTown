@@ -1,0 +1,64 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@android:color/white">
+
+    <ImageView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_above="@+id/email_login_form"
+        android:layout_centerInParent="true"
+        android:layout_marginTop="@dimen/distance_16dp"
+        android:layout_marginBottom="@dimen/distance_32dp"
+        android:gravity="center_horizontal"
+        android:src="@drawable/ic_user_login" />
+
+    <LinearLayout
+        android:id="@+id/email_login_form"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_centerInParent="true"
+        android:orientation="vertical"
+        android:padding="@dimen/distance_16dp">
+
+
+        <EditText
+            android:id="@+id/edt_username"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@drawable/bg_edittext_stroke_gray"
+            android:drawableStart="@drawable/ic_user"
+            android:hint="@string/text_username"
+            android:inputType="text"
+            android:drawablePadding="@dimen/distance_16dp"
+            android:maxLines="1"
+            android:padding="@dimen/distance_10dp"
+            android:singleLine="true" />
+
+
+        <EditText
+            android:id="@+id/edt_password"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/size_45dp"
+            android:layout_marginTop="@dimen/distance_10dp"
+            android:background="@drawable/bg_edittext_stroke_gray"
+            android:hint="@string/text_password"
+            android:drawableStart="@drawable/ic_lock"
+            android:drawablePadding="@dimen/distance_16dp"
+            android:imeOptions="actionUnspecified"
+            android:inputType="textPassword"
+            android:maxLines="1"
+            android:padding="@dimen/distance_10dp"
+            android:singleLine="true" />
+
+        <Button
+            android:id="@+id/btn_login"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/size_45dp"
+            android:layout_marginTop="@dimen/distance_32dp"
+            android:background="@drawable/bg_button_green"
+            android:text="@string/text_login"
+            android:textColor="@android:color/white" />
+    </LinearLayout>
+</RelativeLayout>
