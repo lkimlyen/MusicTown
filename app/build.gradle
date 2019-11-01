@@ -1,9 +1,12 @@
+
 apply plugin: 'com.android.application'
+apply plugin: 'io.fabric'
+
 android {
     def globalConfiguration = rootProject.extensions.getByName("ext")
     compileSdkVersion globalConfiguration.androidCompileSdkVersion
     defaultConfig {
-        applicationId "com.demo.compass.phongthuy"
+        applicationId "com.demo.music.town"
         minSdkVersion globalConfiguration.androidMinSdkVersion
         targetSdkVersion globalConfiguration.androidTargetSdkVersion
         versionCode globalConfiguration.androidVersionCode
@@ -92,4 +95,5 @@ dependencies {
     implementation appDependencies.googleMapServices
     implementation appDependencies.googleLocationServices
     implementation project(':domain')
+    implementation 'com.crashlytics.sdk.android:crashlytics:2.10.1'
 }

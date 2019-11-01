@@ -1,4 +1,4 @@
-package com.demo.compass.domain;
+package com.demo.architect.domain;
 
 import org.junit.Test;
 

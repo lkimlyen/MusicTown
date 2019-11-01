@@ -1,4 +1,4 @@
-package com.demo.compass.data;
+package com.demo.architect.data;
 
 import org.junit.Test;
 

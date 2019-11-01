@@ -1,4 +1,4 @@
-package com.demo.compass.data;
+package com.demo.architect.data;
 
 import android.content.Context;
 import android.support.test.InstrumentationRegistry;

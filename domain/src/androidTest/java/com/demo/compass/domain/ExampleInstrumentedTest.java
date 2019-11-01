@@ -1,4 +1,4 @@
-package com.demo.compass.domain;
+package com.demo.architect.domain;
 
 import android.content.Context;
 import android.support.test.InstrumentationRegistry;

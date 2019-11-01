@@ -1,4 +1,4 @@
-package com.demo.compass.phongthuy;
+package com.demo.music.town;
 
 import org.junit.Test;
 

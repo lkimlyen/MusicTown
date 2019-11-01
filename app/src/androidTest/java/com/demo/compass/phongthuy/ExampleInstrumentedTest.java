@@ -1,4 +1,4 @@
-package com.demo.compass.phongthuy;
+package com.demo.music.town;
 
 import android.content.Context;
 import android.support.test.InstrumentationRegistry;
