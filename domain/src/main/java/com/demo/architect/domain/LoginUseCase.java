@@ -22,9 +22,7 @@ public class LoginUseCase extends BaseUseCase<BaseResponse<UserEntity>> {
     protected Observable<BaseResponse<UserEntity>> buildUseCaseObservable() {
         String userName = ((RequestValue) requestValues).userName;
         String password = ((RequestValue) requestValues).password;
-        String deviceToken = ((RequestValue) requestValues).deviceToken;
-        String deviceId = ((RequestValue) requestValues).deviceId;
-        return remoteRepository.login("ids", "sp", userName, password, deviceToken, deviceId);
+        return remoteRepository.login(userName, password);
     }
 
     @Override
@@ -35,10 +33,10 @@ public class LoginUseCase extends BaseUseCase<BaseResponse<UserEntity>> {
                 Log.d(TAG, "onNext: " + String.valueOf(data));
                 if (useCaseCallback != null) {
                     UserEntity entity = data.getData();
-                    if (entity != null && data.getStatus() ==1) {
+                    if (entity != null && data.getStatus() ==200) {
                         useCaseCallback.onSuccess(new ResponseValue(entity));
                     } else {
-                        useCaseCallback.onError(new ErrorValue(data.getDescription()));
+                        useCaseCallback.onError(new ErrorValue(data.getStatus()));
                     }
                 }
 
@@ -53,7 +51,7 @@ public class LoginUseCase extends BaseUseCase<BaseResponse<UserEntity>> {
             public void onError(Throwable e) {
                 Log.d(TAG, "onError: " + e.toString());
                 if (useCaseCallback != null) {
-                    useCaseCallback.onError(new ErrorValue(e.getMessage()));
+                    useCaseCallback.onError(new ErrorValue(-1));
                 }
             }
         };
@@ -63,14 +61,10 @@ public class LoginUseCase extends BaseUseCase<BaseResponse<UserEntity>> {
     public static final class RequestValue implements RequestValues {
         public final String userName;
         public final String password;
-        private final String deviceToken;
-        private final String deviceId;
 
-        public RequestValue(String userName, String password, String deviceToken, String deviceId) {
+        public RequestValue(String userName, String password) {
             this.userName = userName;
             this.password = password;
-            this.deviceToken = deviceToken;
-            this.deviceId = deviceId;
         }
     }
 
@@ -87,14 +81,14 @@ public class LoginUseCase extends BaseUseCase<BaseResponse<UserEntity>> {
     }
 
     public static final class ErrorValue implements ErrorValues {
-        private final String description;
+        private final int error;
 
-        public ErrorValue(String description) {
-            this.description = description;
+        public ErrorValue(int error) {
+            this.error = error;
         }
 
-        public String getDescription() {
-            return description;
+        public int getData() {
+            return error;
         }
     }
 }

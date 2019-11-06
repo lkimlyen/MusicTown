@@ -2,6 +2,8 @@ package com.demo.music.town.app.di.module;
 
 
 
+import com.demo.architect.data.repository.base.data.remote.DataRepository;
+import com.demo.architect.data.repository.base.data.remote.DataRepositoryImpl;
 import com.demo.music.town.app.CoreApplication;
 import com.demo.architect.data.repository.base.account.remote.AccountRepository;
 import com.demo.architect.data.repository.base.account.remote.AccountRepositoryImpl;
@@ -42,6 +44,10 @@ public class RepositoryModule {
     NotificationRepository provideNotificationRepository(NotificationRepositoryImpl apiServiceImp) {
         return apiServiceImp;
     }
-
+    @Provides
+    @Singleton
+    DataRepository provideDataRepository(DataRepositoryImpl apiServiceImp) {
+        return apiServiceImp;
+    }
 
 }

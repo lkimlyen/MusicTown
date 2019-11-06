@@ -22,12 +22,9 @@ public class DashboardPresenter implements DashboardContract.Presenter {
     @Inject
     LocalRepository localRepository;
 
-    private final LoginUseCase loginUsecase;
-
     @Inject
-    DashboardPresenter(@NonNull DashboardContract.View view, LoginUseCase loginUsecase) {
+    DashboardPresenter(@NonNull DashboardContract.View view) {
         this.view = view;
-        this.loginUsecase = loginUsecase;
     }
 
     @Inject
@@ -46,26 +43,5 @@ public class DashboardPresenter implements DashboardContract.Presenter {
         Log.d(TAG, TAG + ".stop() called");
     }
 
-    @Override
-    public void login(String username, String password) {
-        view.showProgressBar();
-
-        loginUsecase.executeIO(new LoginUseCase.RequestValue(username, password, null, ""), new BaseUseCase.UseCaseCallback
-                <LoginUseCase.ResponseValue, LoginUseCase.ErrorValue>() {
-            @Override
-            public void onSuccess(LoginUseCase.ResponseValue successResponse) {
-                view.hideProgressBar();
-                Log.d(TAG, new Gson().toJson(successResponse.getEntity()));
-                view.showSuccess("Thành công");
-            }
-
-            @Override
-            public void onError(LoginUseCase.ErrorValue errorResponse) {
-
-                    view.showError(errorResponse.getDescription());
-                view.hideProgressBar();
-            }
-        });
-    }
 
 }

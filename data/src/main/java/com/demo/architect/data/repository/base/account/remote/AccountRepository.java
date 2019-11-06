@@ -7,6 +7,6 @@ import io.reactivex.Observable;
 
 
 public interface AccountRepository {
-    Observable<BaseResponse<UserEntity>> login(String appCode, String userType, String username, String password, String deviceToken, String deviceId);
+    Observable<BaseResponse<UserEntity>> login(String username, String password);
 
 }

@@ -2,6 +2,8 @@ package com.demo.music.town.app.di.module;
 
 import android.app.Application;
 
+import com.demo.architect.data.repository.base.data.remote.DataApiInterface;
+import com.demo.architect.data.repository.base.data.remote.DataRepositoryImpl;
 import com.demo.music.town.util.RetrofitJsonConverter;
 import com.demo.architect.data.repository.base.account.remote.AccountApiInterface;
 import com.demo.architect.data.repository.base.account.remote.AccountRepositoryImpl;
@@ -78,7 +80,17 @@ public class NetModule {
         return new AccountRepositoryImpl(retrofit.create(AccountApiInterface.class));
     }
 
-
+    @Provides
+    @Singleton
+    DataRepositoryImpl provideDataRetrofit(OkHttpClient okHttpClient, Gson gson, RxJavaCallAdapterFactory rxAdapterFactory) {
+        Retrofit retrofit = new Retrofit.Builder()
+                .baseUrl(mBaseUrl)
+                .addCallAdapterFactory(rxAdapterFactory)
+                .addConverterFactory(RetrofitJsonConverter.create(gson))
+                .client(okHttpClient)
+                .build();
+        return new DataRepositoryImpl(retrofit.create(DataApiInterface.class));
+    }
 
 }
 

@@ -11,10 +11,7 @@ import retrofit2.http.POST;
 public interface AccountApiInterface {
     @FormUrlEncoded
     @POST("http://blue.imark.com.vn/WS/api/LoginWS")
-    Call<BaseResponse<UserEntity>> login(@Field("pAppCode") String appCode,
-                                         @Field("pUserType") String userType,
+    Call<BaseResponse<UserEntity>> login(
                                          @Field("pUserName") String userName,
-                                         @Field("pPassWord") String password,
-                                         @Field("pDeviceToken") String deviceToken,
-                                         @Field("pDeviceID") String deviceId);
+                                         @Field("pPassWord") String password);
 }

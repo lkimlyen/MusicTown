@@ -6,52 +6,66 @@ import com.google.gson.annotations.SerializedName;
 import java.io.Serializable;
 
 public class UserEntity implements Serializable {
-    @SerializedName("UserID")
-    @Expose
-    private int userId;
 
-    @SerializedName("Name")
-    @Expose
-    private String name;
+    public static class User {
+        @SerializedName("id")
+        @Expose
+        private String id;
 
-    @SerializedName("ProgramID")
-    @Expose
-    private int programId;
+        @SerializedName("fullname")
+        @Expose
+        private String fullName;
 
-    @SerializedName("ProgramName")
-    @Expose
-    private String programName;
+        @SerializedName("avatar")
+        @Expose
+        private String avatar;
 
-    @SerializedName("ProjectID")
-    @Expose
-    private int projectId;
-    @SerializedName("TypeProgram")
-    @Expose
-    private String typeProgram;
+        @SerializedName("phone")
+        @Expose
+        private String phone;
 
-    public int getUserId() {
-        return userId;
+        @SerializedName("email")
+        @Expose
+        private String email;
+        @SerializedName("username")
+        @Expose
+        private String username;
+
+
     }
 
-    public String getName() {
-        return name;
+    @SerializedName("object")
+    @Expose
+    private User user;
+
+    @SerializedName("token")
+    @Expose
+    private String token;
+    public String getId() {
+        return user.id;
     }
 
-    public int getProjectId() {
-        return projectId;
+    public String getFullName() {
+        return user.fullName;
     }
 
-    public String getTypeProgram() {
-        return typeProgram;
+    public String getAvatar() {
+        return user.avatar;
     }
 
-
-
-    public int getProgramId() {
-        return programId;
+    public String getPhone() {
+        return user.phone;
     }
 
-    public String getProgramName() {
-        return programName;
+    public String getEmail() {
+        return user.email;
+    }
+
+    public String getUsername() {
+        return user.username;
+    }
+
+    public String getToken() {
+        return token;
     }
 }

@@ -8,17 +8,17 @@ import com.google.gson.annotations.SerializedName;
  */
 
 public class BaseResponse<T> {
-    @SerializedName("Status")
+    @SerializedName("code")
     @Expose
     private int status;
 
 
-    @SerializedName("Description")
+    @SerializedName("description")
     @Expose
     private String description;
 
 
-    @SerializedName("Data")
+    @SerializedName("results")
     @Expose
     private T data;
 

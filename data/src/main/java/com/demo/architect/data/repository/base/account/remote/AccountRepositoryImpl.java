@@ -43,13 +43,13 @@ public class AccountRepositoryImpl implements AccountRepository {
     }
 
     @Override
-    public Observable<BaseResponse<UserEntity>> login(final String appCode, final String userType, final String username,
-                                                      final String password, final String deviceToken, final String deviceId) {
+    public Observable<BaseResponse<UserEntity>> login( final String username,
+                                                      final String password) {
         return Observable.create(new ObservableOnSubscribe<BaseResponse<UserEntity>>() {
             @Override
             public void subscribe(ObservableEmitter<BaseResponse<UserEntity>> emitter) throws Exception {
-                handleUserLoginResponse(mRemoteApiInterface.login(appCode, userType,
-                        username, password, deviceToken, deviceId), emitter);
+                handleUserLoginResponse(mRemoteApiInterface.login(
+                        username, password), emitter);
             }
         });
     }

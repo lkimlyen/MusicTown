@@ -13,11 +13,9 @@ public interface DashboardContract {
 
         void showError(String error);
 
-        void loginSuccess();
 
     }
 
     interface Presenter extends BasePresenter {
-        void login(String username, String password);
     }
 }

@@ -183,4 +183,6 @@
     <string name="text_number_not_empty">Số lượng không được để trống</string>
     <string name="text_reset_fail">Reset dữ liệu thất bại!</string>
     <string name="text_report_posm">Báo cáo POSM</string>
+    <string name="text_err_connect_internet">No internet connection</string>
+    <string name="text_download_option">Download Option</string>
 </resources>
