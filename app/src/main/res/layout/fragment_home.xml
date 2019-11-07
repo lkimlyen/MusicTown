@@ -12,13 +12,11 @@
         android:textSize="@dimen/text_14sp"
         android:textColor="@color/white"
         />
-    <ss.com.bannerslider.Slider
-        android:id="@+id/slider"
+    <androidx.recyclerview.widget.RecyclerView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="@dimen/distance_8dp"
-        />
-
+        android:id="@+id/rv_playlist"/>
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"

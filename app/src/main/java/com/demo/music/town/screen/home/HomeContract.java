@@ -1,8 +1,11 @@
 package com.demo.music.town.screen.home;
 
 
+import com.demo.architect.data.model.ArtistCategory;
 import com.demo.music.town.app.base.BasePresenter;
 import com.demo.music.town.app.base.BaseView;
+
+import java.util.List;
 
 /**
  * Created by MSI on 26/11/2017.
@@ -13,7 +16,7 @@ public interface HomeContract {
 
         void showError(String error);
 
-        void loginSuccess();
+        void displayArtistCategoryList(List<ArtistCategory> list);
 
     }
 

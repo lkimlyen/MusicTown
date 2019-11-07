@@ -9,13 +9,19 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-import androidx.appcompat.app.ActionBar;
-import androidx.appcompat.app.AppCompatActivity;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
+import com.demo.architect.data.model.ArtistCategory;
 import com.demo.music.town.R;
+import com.demo.music.town.adapter.ArtistAdapter;
 import com.demo.music.town.app.base.BaseFragment;
 import com.demo.music.town.app.di.Precondition;
 
+import java.util.ArrayList;
+import java.util.List;
+
+import butterknife.BindView;
 import butterknife.ButterKnife;
 
 /**
@@ -37,6 +43,15 @@ public class HomeFragment extends BaseFragment implements HomeContract.View {
         return fragment;
     }
 
+    @BindView(R.id.rv_artist)
+    RecyclerView rvArtist;
+    @BindView(R.id.rv_playlist)
+    RecyclerView rvPlaylist;
+    @BindView(R.id.rv_recommended)
+    RecyclerView rvRecommended;
+    private ArtistAdapter artistAdapter;
+    private List<ArtistCategory> artistCategoryList = new ArrayList<>();
+
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -53,7 +68,10 @@ public class HomeFragment extends BaseFragment implements HomeContract.View {
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_home, container, false);
         ButterKnife.bind(this, view);
-
+        artistAdapter = new ArtistAdapter(artistCategoryList);
+        rvArtist.setLayoutManager(new LinearLayoutManager(getContext(), RecyclerView.HORIZONTAL, false));
+        rvArtist.setAdapter(artistAdapter);
+        mPresenter.sendRequestGetArtistCategory();
         return view;
     }
 
@@ -81,7 +99,7 @@ public class HomeFragment extends BaseFragment implements HomeContract.View {
     @Override
     public void onPause() {
         super.onPause();
-      //  mPresenter.stop();
+        //  mPresenter.stop();
     }
 
 
@@ -108,12 +126,14 @@ public class HomeFragment extends BaseFragment implements HomeContract.View {
     }
 
     @Override
-    public void showSuccess(String message) {
-        startDialogNoti(message);
+    public void displayArtistCategoryList(List<ArtistCategory> list) {
+        this.artistCategoryList.addAll(list);
+        artistAdapter.notifyDataSetChanged();
     }
 
     @Override
-    public void loginSuccess() {
+    public void showSuccess(String message) {
+        startDialogNoti(message);
     }
 
 

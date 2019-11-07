@@ -3,19 +3,27 @@ apply plugin: 'com.android.application'
 apply plugin: 'io.fabric'
 
 android {
+    signingConfigs {
+        config {
+            storeFile file('../keystore')
+            storePassword '123456aA@'
+            keyAlias = 'hitek'
+            keyPassword '123456aA@'
+        }
+    }
     def globalConfiguration = rootProject.extensions.getByName("ext")
     compileSdkVersion globalConfiguration.androidCompileSdkVersion
     defaultConfig {
-        applicationId "com.demo.music.town"
+        applicationId "com.demo.haru.music"
         minSdkVersion globalConfiguration.androidMinSdkVersion
         targetSdkVersion globalConfiguration.androidTargetSdkVersion
         versionCode globalConfiguration.androidVersionCode
         versionName globalConfiguration.androidVersionName
         multiDexEnabled true
+        flavorDimensions "default"
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
     }
 
-    flavorDimensions "default"
     lintOptions {
         checkReleaseBuilds false
     }
@@ -31,11 +39,19 @@ android {
 
     productFlavors {
         dev {
-
+            applicationId "com.demo.haru.music"
+            versionCode 1
+            versionName "1.0.0"
+            resValue 'string', "app_name", "HARUMUSIC dev"
+             signingConfig signingConfigs.config
         }
 
         prod {
-
+            applicationId "com.demo.haru.music"
+            versionCode 1
+            versionName "1.0.0"
+            resValue 'string', "app_name", "HARUMUSIC"
+            signingConfig signingConfigs.config
         }
     }
 
@@ -46,7 +62,14 @@ android {
             }
         }
     }
-
+    android.applicationVariants.all { variant ->
+        variant.outputs.all {
+            def date = new Date();
+            def formattedDate = date.format('yyyyMMdd')
+            def formattedTime = date.format('HHmm')
+            outputFileName = formattedDate + "_HARUMUSIC_${variant.name}-${variant.versionName}-${formattedTime}.apk"
+        }
+    }
     compileOptions {
         sourceCompatibility JavaVersion.VERSION_1_8
         targetCompatibility JavaVersion.VERSION_1_8
@@ -96,3 +119,4 @@ dependencies {
     implementation 'com.ss.bannerslider:bannerslider:2.0.0'
     implementation 'com.crashlytics.sdk.android:crashlytics:2.10.1'
 }
+apply plugin: 'com.google.gms.google-services'

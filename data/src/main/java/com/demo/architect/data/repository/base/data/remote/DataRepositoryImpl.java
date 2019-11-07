@@ -1,5 +1,6 @@
 package com.demo.architect.data.repository.base.data.remote;
 
+import com.demo.architect.data.model.ArtistCategory;
 import com.demo.architect.data.model.BaseResponse;
 import com.demo.architect.data.model.UserEntity;
 
@@ -18,9 +19,9 @@ public class DataRepositoryImpl implements DataRepository {
     }
 
 
-    private void handleUserLoginResponse(Call<BaseResponse<UserEntity>> call, ObservableEmitter<BaseResponse<UserEntity>> emitter) {
+    private void handleArtistCategoryResponse(Call<BaseResponse<ArtistCategory.ArtistCategoryRespond>> call, ObservableEmitter<BaseResponse<ArtistCategory.ArtistCategoryRespond>> emitter) {
         try {
-            BaseResponse<UserEntity> response = call.execute().body();
+            BaseResponse<ArtistCategory.ArtistCategoryRespond> response = call.execute().body();
 
             if (!emitter.isDisposed()){
                 if (response != null) {
@@ -42,14 +43,15 @@ public class DataRepositoryImpl implements DataRepository {
         }
     }
 
+
+
     @Override
-    public Observable<BaseResponse<UserEntity>> login( final String username,
-                                                      final String password) {
-        return Observable.create(new ObservableOnSubscribe<BaseResponse<UserEntity>>() {
+    public Observable<BaseResponse<ArtistCategory.ArtistCategoryRespond>> sendReqestGetArtistCategory(final int limit, final int page) {
+        return Observable.create(new ObservableOnSubscribe<BaseResponse<ArtistCategory.ArtistCategoryRespond>>() {
             @Override
-            public void subscribe(ObservableEmitter<BaseResponse<UserEntity>> emitter) throws Exception {
-                handleUserLoginResponse(mRemoteApiInterface.login(
-                        username, password), emitter);
+            public void subscribe(ObservableEmitter<BaseResponse<ArtistCategory.ArtistCategoryRespond>> emitter) throws Exception {
+                handleArtistCategoryResponse(mRemoteApiInterface.sendReqestGetArtistCategory(
+                        limit, page), emitter);
             }
         });
     }

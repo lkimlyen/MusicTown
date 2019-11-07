@@ -12,25 +12,23 @@ public class BaseResponse<T> {
     @Expose
     private int status;
 
-
-    @SerializedName("description")
-    @Expose
-    private String description;
-
-
     @SerializedName("results")
     @Expose
-    private T data;
+    private BaseObject<T> results;
+
+    @SerializedName("pagination")
+    @Expose
+    private Pagination pagination;
 
     public int getStatus() {
         return status;
     }
 
-    public String getDescription() {
-        return description;
+    public BaseObject<T> getResults() {
+        return results;
     }
 
-    public T getData() {
-        return data;
+    public Pagination getPagination() {
+        return pagination;
     }
 }

@@ -32,7 +32,7 @@ public class LoginUseCase extends BaseUseCase<BaseResponse<UserEntity>> {
             public void onNext(BaseResponse<UserEntity> data) {
                 Log.d(TAG, "onNext: " + String.valueOf(data));
                 if (useCaseCallback != null) {
-                    UserEntity entity = data.getData();
+                    UserEntity entity = data.getResults().getObjects();
                     if (entity != null && data.getStatus() ==200) {
                         useCaseCallback.onSuccess(new ResponseValue(entity));
                     } else {

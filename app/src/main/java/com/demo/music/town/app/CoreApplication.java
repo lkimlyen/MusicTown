@@ -6,6 +6,7 @@ import android.content.Context;
 import android.os.Build;
 import android.os.Bundle;
 import com.crashlytics.android.Crashlytics;
+import com.demo.architect.data.repository.base.Settings;
 import com.demo.music.town.app.bus.MainThreadBus;
 import com.demo.music.town.app.di.component.ApplicationComponent;
 import com.demo.music.town.app.di.component.DaggerApplicationComponent;
@@ -13,6 +14,7 @@ import com.demo.music.town.app.di.module.ApplicationModule;
 import com.demo.music.town.app.di.module.NetModule;
 import com.demo.music.town.app.di.module.UseCaseModule;
 import com.google.firebase.FirebaseApp;
+import com.google.firebase.messaging.FirebaseMessaging;
 import com.squareup.otto.Bus;
 import com.squareup.otto.ThreadEnforcer;
 
@@ -76,7 +78,8 @@ public class CoreApplication extends MultiDexApplication implements Application.
     }
 
     private void initializeFirebase() {
-     //   FirebaseApp.initializeApp(this);
+        FirebaseApp.initializeApp(this);
+        FirebaseMessaging.getInstance().subscribeToTopic("main");
     }
 
 
@@ -104,7 +107,7 @@ public class CoreApplication extends MultiDexApplication implements Application.
     private void initializeDagger() {
         this.applicationComponent = DaggerApplicationComponent.builder()
                 .applicationModule(new ApplicationModule(this))
-                .netModule(new NetModule("http://google.com/"))
+                .netModule(new NetModule(Settings.URL_SERVER))
                 .useCaseModule(new UseCaseModule())
                 .build();
 
