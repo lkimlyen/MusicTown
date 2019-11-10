@@ -1,7 +1,6 @@
 package com.demo.music.town.app.di.component;
 
 
-
 import com.demo.music.town.app.CoreApplication;
 import com.demo.music.town.app.base.BaseActivity;
 import com.demo.music.town.app.base.BaseFragment;
@@ -15,10 +14,9 @@ import com.demo.music.town.screen.home.HomeModule;
 import com.demo.music.town.screen.music.MusicModule;
 import com.demo.music.town.screen.splash.SplashComponent;
 import com.demo.music.town.screen.splash.SplashModule;
-import com.demo.music.town.screen.video_local.VideoLocalComponent;
+import com.demo.music.town.screen.tranding_video.TrandingVideoModule;
 import com.demo.music.town.screen.video_local.VideoLocalModule;
-import com.demo.music.town.screen.video_online.VideoOnlineComponent;
-import com.demo.music.town.screen.video_online.VideoOnlineModule;
+import com.demo.music.town.screen.tranding_video.TrandingVideoComponent;
 
 import javax.inject.Singleton;
 
@@ -43,7 +41,8 @@ public interface ApplicationComponent {
 
     DashboardComponent plus(HomeModule homeModule, MusicModule musicModule, VideoLocalModule videoLocalModule, DashboardModule dashboardModule);
 
-     SplashComponent plus(SplashModule module);
+    SplashComponent plus(SplashModule module);
 
-     VideoOnlineComponent plus(VideoOnlineModule module);
+    TrandingVideoComponent plus(TrandingVideoModule module);
+
 }

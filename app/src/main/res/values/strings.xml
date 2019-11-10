@@ -184,4 +184,6 @@
     <string name="text_report_posm">Báo cáo POSM</string>
     <string name="text_err_connect_internet">No internet connection</string>
     <string name="text_download_option">Download Option</string>
+    <string name="error_no_yt_link">Not a valid YouTube link!</string>
+
 </resources>

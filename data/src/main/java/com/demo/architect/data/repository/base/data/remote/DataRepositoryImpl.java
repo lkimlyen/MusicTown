@@ -2,7 +2,7 @@ package com.demo.architect.data.repository.base.data.remote;
 
 import com.demo.architect.data.model.ArtistCategory;
 import com.demo.architect.data.model.BaseResponse;
-import com.demo.architect.data.model.UserEntity;
+import com.demo.architect.data.model.TrendingVideo;
 
 import io.reactivex.Observable;
 import io.reactivex.ObservableEmitter;
@@ -43,6 +43,31 @@ public class DataRepositoryImpl implements DataRepository {
         }
     }
 
+    private void handleTrandingVideoResponse(Call<BaseResponse<TrendingVideo.TrandingVideoRespond>> call,
+                                             ObservableEmitter<BaseResponse<TrendingVideo.TrandingVideoRespond>> emitter) {
+        try {
+            BaseResponse<TrendingVideo.TrandingVideoRespond> response = call.execute().body();
+
+            if (!emitter.isDisposed()){
+                if (response != null) {
+                    emitter.onNext(response);
+                } else {
+                    emitter.onError(new Exception("Network Error!"));
+                }
+                emitter.onComplete();
+            }
+
+
+        } catch (Exception e) {
+            if (!emitter.isDisposed()){
+                emitter.onError(e);
+                emitter.onComplete();
+            }
+
+
+        }
+    }
+
 
 
     @Override
@@ -51,6 +76,17 @@ public class DataRepositoryImpl implements DataRepository {
             @Override
             public void subscribe(ObservableEmitter<BaseResponse<ArtistCategory.ArtistCategoryRespond>> emitter) throws Exception {
                 handleArtistCategoryResponse(mRemoteApiInterface.sendReqestGetArtistCategory(
+                        limit, page), emitter);
+            }
+        });
+    }
+
+    @Override
+    public Observable<BaseResponse<TrendingVideo.TrandingVideoRespond>> sendReqestGetTrandingVideo(final int limit, final int page) {
+        return Observable.create(new ObservableOnSubscribe<BaseResponse<TrendingVideo.TrandingVideoRespond>>() {
+            @Override
+            public void subscribe(ObservableEmitter<BaseResponse<TrendingVideo.TrandingVideoRespond>> emitter) throws Exception {
+                handleTrandingVideoResponse(mRemoteApiInterface.sendReqestGetTrandingVideo(
                         limit, page), emitter);
             }
         });

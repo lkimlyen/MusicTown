@@ -4,6 +4,7 @@ package com.demo.music.town.app.di.module;
 import com.demo.architect.data.repository.base.account.remote.AccountRepository;
 import com.demo.architect.data.repository.base.data.remote.DataRepository;
 import com.demo.architect.domain.GetArtistCategoryListUseCase;
+import com.demo.architect.domain.GetTrandingVideoListUseCase;
 import com.demo.architect.domain.LoginUseCase;
 
 import dagger.Module;
@@ -25,6 +26,10 @@ public class UseCaseModule {
     @Provides
     GetArtistCategoryListUseCase provideGetArtistCategoryListUseCase(DataRepository remoteRepository) {
         return new GetArtistCategoryListUseCase(remoteRepository);
+    }
+    @Provides
+    GetTrandingVideoListUseCase provideGetTrandingVideoListUseCase(DataRepository remoteRepository) {
+        return new GetTrandingVideoListUseCase(remoteRepository);
     }
 
 }

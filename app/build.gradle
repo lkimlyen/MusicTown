@@ -118,5 +118,8 @@ dependencies {
     implementation project(':domain')
     implementation 'com.ss.bannerslider:bannerslider:2.0.0'
     implementation 'com.crashlytics.sdk.android:crashlytics:2.10.1'
+    implementation 'com.jcodecraeer:xrecyclerview:1.6.0'
+    implementation 'androidx.constraintlayout:constraintlayout:2.0.0-beta2'
+    compile project(path: ':youtubeextractor')
 }
 apply plugin: 'com.google.gms.google-services'
