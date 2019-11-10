@@ -25,7 +25,7 @@ import at.huber.youtubeExtractor.VideoMeta;
 import at.huber.youtubeExtractor.YouTubeExtractor;
 import at.huber.youtubeExtractor.YtFile;
 
-public class DownloadActivity extends BaseActivity {
+public class DownloadActivity extends Activity {
     private final String TAG = DownloadActivity.class.getName();
     private static String youtubeLink;
 
@@ -39,7 +39,7 @@ public class DownloadActivity extends BaseActivity {
     private ProgressBar mainProgressBar;
 
     @Override
-    public void onCreate(Bundle savedInstanceState) {
+    protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
         setContentView(R.layout.fragment_download);
