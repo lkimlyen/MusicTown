@@ -3,35 +3,32 @@ package com.demo.architect.data.model;
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
-import java.util.List;
-
 /**
  * Created by uyminhduc on 10/23/16.
  */
 
 public class BaseListResponse<T> {
-    @SerializedName("Status")
+    @SerializedName("code")
     @Expose
     private int status;
 
-    @SerializedName("Description")
+    @SerializedName("results")
     @Expose
-    private String description;
+    private BaseObjects<T> results;
 
-
-    @SerializedName("Data")
+    @SerializedName("pagination")
     @Expose
-    private List<T> data;
+    private Pagination pagination;
 
     public int getStatus() {
         return status;
     }
 
-    public String getDescription() {
-        return description;
+    public BaseObjects<T> getResults() {
+        return results;
     }
 
-    public List<T> getData() {
-        return data;
+    public Pagination getPagination() {
+        return pagination;
     }
 }

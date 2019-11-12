@@ -22,9 +22,11 @@ import butterknife.ButterKnife;
 
 public class ArtistAdapter extends RecyclerView.Adapter<ArtistAdapter.ViewHolder> {
     private List<ArtistCategory> artistCategories;
+    private int witdhItem;
 
-    public ArtistAdapter(List<ArtistCategory> artistCategories) {
+    public ArtistAdapter(List<ArtistCategory> artistCategories, int witdhItem) {
         this.artistCategories = artistCategories;
+        this.witdhItem = witdhItem;
     }
 
     @NonNull
@@ -37,7 +39,7 @@ public class ArtistAdapter extends RecyclerView.Adapter<ArtistAdapter.ViewHolder
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
         ArtistCategory item = artistCategories.get(position);
-        Picasso.get().load(item.getThumbnailUrl()).into(holder.ivCover, new Callback() {
+        Picasso.get().load(item.getThumbnailUrl()).resize(witdhItem,witdhItem*9/16).into(holder.ivCover, new Callback() {
             @Override
             public void onSuccess() {
                 holder.progressBar.setVisibility(View.GONE);

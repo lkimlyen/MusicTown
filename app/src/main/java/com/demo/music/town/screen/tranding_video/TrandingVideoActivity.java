@@ -6,6 +6,9 @@ import android.os.Bundle;
 
 import androidx.fragment.app.FragmentTransaction;
 
+import com.demo.architect.data.helper.Constants;
+import com.demo.architect.data.model.ArtistCategory;
+import com.demo.architect.data.model.TrendingVideoCategory;
 import com.demo.music.town.R;
 import com.demo.music.town.app.CoreApplication;
 import com.demo.music.town.app.base.BaseActivity;
@@ -23,18 +26,17 @@ public class TrandingVideoActivity extends BaseActivity {
 
     @Inject
     TrandingVideoPresenter presenter;
-    public static void start(Context context) {
-        start(context, false);
-    }
 
-    public static void start(Context context, boolean clearTop) {
+    public static void start(Context context, TrendingVideoCategory category) {
         Intent intent = new Intent(context, TrandingVideoActivity.class);
-        if (clearTop) {
-            intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-        }
+        intent.putExtra(Constants.BUNDLE_CATEGORY, category);
         context.startActivity(intent);
     }
-
+    public static void start(Context context, ArtistCategory category) {
+        Intent intent = new Intent(context, TrandingVideoActivity.class);
+        intent.putExtra(Constants.BUNDLE_CATEGORY, category);
+        context.startActivity(intent);
+    }
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

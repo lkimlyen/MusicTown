@@ -3,7 +3,7 @@ package com.demo.architect.domain;
 import android.util.Log;
 
 import com.demo.architect.data.model.ArtistCategory;
-import com.demo.architect.data.model.BaseResponse;
+import com.demo.architect.data.model.BaseListResponse;
 import com.demo.architect.data.repository.base.data.remote.DataRepository;
 
 import java.util.List;
@@ -12,7 +12,7 @@ import io.reactivex.Observable;
 import io.reactivex.observers.DisposableObserver;
 
 
-public class GetArtistCategoryListUseCase extends BaseUseCase<BaseResponse<ArtistCategory.ArtistCategoryRespond>> {
+public class GetArtistCategoryListUseCase extends BaseUseCase<BaseListResponse<ArtistCategory.ArtistCategoryRespond>> {
     private static final String TAG = GetArtistCategoryListUseCase.class.getSimpleName();
     private final DataRepository remoteRepository;
 
@@ -21,17 +21,17 @@ public class GetArtistCategoryListUseCase extends BaseUseCase<BaseResponse<Artis
     }
 
     @Override
-    protected Observable<BaseResponse<ArtistCategory.ArtistCategoryRespond>> buildUseCaseObservable() {
+    protected Observable<BaseListResponse<ArtistCategory.ArtistCategoryRespond>> buildUseCaseObservable() {
         int limit = ((RequestValue) requestValues).limit;
         int page  = ((RequestValue) requestValues).page;
         return remoteRepository.sendReqestGetArtistCategory(limit, page);
     }
 
     @Override
-    protected DisposableObserver<BaseResponse<ArtistCategory.ArtistCategoryRespond>> buildUseCaseSubscriber() {
-        return new DefaultObserver<BaseResponse<ArtistCategory.ArtistCategoryRespond>>() {
+    protected DisposableObserver<BaseListResponse<ArtistCategory.ArtistCategoryRespond>> buildUseCaseSubscriber() {
+        return new DefaultObserver<BaseListResponse<ArtistCategory.ArtistCategoryRespond>>() {
             @Override
-            public void onNext(BaseResponse<ArtistCategory.ArtistCategoryRespond> data) {
+            public void onNext(BaseListResponse<ArtistCategory.ArtistCategoryRespond> data) {
                 Log.d(TAG, "onNext: " + String.valueOf(data));
                 if (useCaseCallback != null) {
                     List<ArtistCategory> result = data.getResults().getObjects().getRows();

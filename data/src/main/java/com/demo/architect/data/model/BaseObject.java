@@ -5,11 +5,11 @@ import com.google.gson.annotations.SerializedName;
 
 public class BaseObject<T>{
 
-    @SerializedName("objects")
+    @SerializedName("object")
     @Expose
-    private T objects;
+    private T object;
 
     public T getObjects() {
-        return objects;
+        return object;
     }
 }

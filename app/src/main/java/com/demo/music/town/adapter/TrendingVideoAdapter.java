@@ -3,6 +3,7 @@ package com.demo.music.town.adapter;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.ProgressBar;
 import android.widget.TextView;
@@ -27,6 +28,7 @@ public class TrendingVideoAdapter extends RecyclerView.Adapter<TrendingVideoAdap
     private List<TrendingVideo> videoList;
 
     private OnClickItemListener listener;
+
     public TrendingVideoAdapter(List<TrendingVideo> videoList, OnClickItemListener listener) {
         this.videoList = videoList;
         this.listener = listener;
@@ -61,8 +63,17 @@ public class TrendingVideoAdapter extends RecyclerView.Adapter<TrendingVideoAdap
         holder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                if (listener != null){
+                if (listener != null) {
                     listener.onClickItem(trendingVideo);
+                }
+            }
+        });
+
+        holder.ibDownload.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                if (listener != null) {
+                    listener.onDownload(trendingVideo.getVideoUrl());
                 }
             }
         });
@@ -88,14 +99,19 @@ public class TrendingVideoAdapter extends RecyclerView.Adapter<TrendingVideoAdap
         @BindView(R.id.progressBar)
         ProgressBar progressBar;
 
+        @BindView(R.id.ib_download)
+        ImageButton ibDownload;
+
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
 
-            ButterKnife.bind(this,itemView);
+            ButterKnife.bind(this, itemView);
         }
     }
 
-    public interface OnClickItemListener{
+    public interface OnClickItemListener {
         void onClickItem(TrendingVideo trendingVideo);
+
+        void onDownload(String url);
     }
 }

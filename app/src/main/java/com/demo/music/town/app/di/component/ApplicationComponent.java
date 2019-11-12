@@ -12,11 +12,15 @@ import com.demo.music.town.screen.dashboard.DashboardComponent;
 import com.demo.music.town.screen.dashboard.DashboardModule;
 import com.demo.music.town.screen.home.HomeModule;
 import com.demo.music.town.screen.music.MusicModule;
+import com.demo.music.town.screen.playlist.PlayListComponent;
+import com.demo.music.town.screen.playlist.PlayListModule;
 import com.demo.music.town.screen.splash.SplashComponent;
 import com.demo.music.town.screen.splash.SplashModule;
+import com.demo.music.town.screen.tranding_video.TrandingVideoComponent;
 import com.demo.music.town.screen.tranding_video.TrandingVideoModule;
 import com.demo.music.town.screen.video_local.VideoLocalModule;
-import com.demo.music.town.screen.tranding_video.TrandingVideoComponent;
+import com.demo.music.town.screen.view_video.ViewVideoComponent;
+import com.demo.music.town.screen.view_video.ViewVideoModule;
 
 import javax.inject.Singleton;
 
@@ -44,5 +48,9 @@ public interface ApplicationComponent {
     SplashComponent plus(SplashModule module);
 
     TrandingVideoComponent plus(TrandingVideoModule module);
+
+    ViewVideoComponent plus(ViewVideoModule module);
+
+    PlayListComponent plus(PlayListModule module);
 
 }

@@ -8,6 +8,7 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.TextView;
 
 import androidx.recyclerview.widget.DefaultItemAnimator;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -15,11 +16,15 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.demo.architect.data.helper.Constants;
 import com.demo.architect.data.model.TrendingVideo;
+import com.demo.architect.data.model.TrendingVideoCategory;
 import com.demo.music.town.R;
 import com.demo.music.town.adapter.TrendingVideoAdapter;
 import com.demo.music.town.app.base.BaseFragment;
 import com.demo.music.town.app.di.Precondition;
 import com.demo.music.town.screen.download.DownloadActivity;
+import com.demo.music.town.screen.view_video.ViewVideoActivity;
+import com.demo.music.town.screen.view_video.WatchActivity;
+import com.demo.music.town.screen.view_video.YouTubePlayerActivity;
 import com.jcodecraeer.xrecyclerview.ProgressStyle;
 import com.jcodecraeer.xrecyclerview.XRecyclerView;
 
@@ -50,6 +55,10 @@ public class TrandingVideoFragment extends BaseFragment implements TrandingVideo
 
     @BindView(R.id.rv_video)
     XRecyclerView rvVideo;
+
+    @BindView(R.id.tv_title)
+    TextView tvTitle;
+    private TrendingVideoCategory trendingVideoCategory;
     private TrendingVideoAdapter adapter;
     private List<TrendingVideo> trendingVideoList = new ArrayList<>();
     private int page = 1;
@@ -70,10 +79,18 @@ public class TrandingVideoFragment extends BaseFragment implements TrandingVideo
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_tranding_video, container, false);
         ButterKnife.bind(this, view);
+        trendingVideoCategory =(TrendingVideoCategory) getActivity().getIntent().getSerializableExtra(Constants.BUNDLE_CATEGORY);
+        tvTitle.setText(trendingVideoCategory.getName());
         adapter = new TrendingVideoAdapter(trendingVideoList, new TrendingVideoAdapter.OnClickItemListener() {
             @Override
             public void onClickItem(TrendingVideo trendingVideo) {
-                DownloadActivity.start(getContext(), trendingVideo.getVideoUrl());
+//                YouTubePlayerActivity.start(getContext(), trendingVideo);
+                ViewVideoActivity.start(getContext(),trendingVideo);
+            }
+
+            @Override
+            public void onDownload(String url) {
+                DownloadActivity.start(getContext(), url);
             }
         });
         LinearLayoutManager layoutManager = new LinearLayoutManager(getActivity());
@@ -89,7 +106,9 @@ public class TrandingVideoFragment extends BaseFragment implements TrandingVideo
         rvVideo.setLoadingListener(new XRecyclerView.LoadingListener() {
             @Override
             public void onRefresh() {
-                mPresenter.sendRequestGetTrandingVideoList("", 1);
+                if (trendingVideoCategory != null){
+                    mPresenter.sendRequestGetTrandingVideoList(trendingVideoCategory.getId(), 1);
+                }
                 rvVideo.setLoadingMoreEnabled(true);
 //                rcvData.refreshComplete();
                 // refresh
@@ -100,10 +119,15 @@ public class TrandingVideoFragment extends BaseFragment implements TrandingVideo
                 // load more
 //                rcvData.loadMoreComplete();
 
-                mPresenter.sendRequestGetTrandingVideoList("", page);
+                if (trendingVideoCategory != null){
+                    mPresenter.sendRequestGetTrandingVideoList(trendingVideoCategory.getId(), page);
+                }
             }
         });
-        mPresenter.sendRequestGetTrandingVideoList("", page);
+        if (trendingVideoCategory != null){
+            mPresenter.sendRequestGetTrandingVideoList(trendingVideoCategory.getId(), page);
+        }
+
         return view;
     }
 

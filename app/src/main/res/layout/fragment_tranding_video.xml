@@ -14,7 +14,50 @@
         app:contentInsetEnd="0dp"
         app:contentInsetLeft="0dp"
         app:contentInsetRight="0dp"
-        app:contentInsetStart="0dp"></androidx.appcompat.widget.Toolbar>
+        app:contentInsetStart="0dp">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+
+            android:gravity="center_vertical"
+            android:orientation="horizontal">
+
+            <ImageButton
+                android:id="@+id/ib_back"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:padding="@dimen/distance_8dp"
+                android:layout_marginStart="@dimen/distance_8dp"
+                android:background="@color/transparent"
+                android:src="@drawable/ic_back" />
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="POPULAR PLAY LIST"
+                android:id="@+id/tv_title"
+                android:textColor="@color/white"
+                android:lines="1"
+                android:singleLine="true"
+                android:textAllCaps="true"
+                android:gravity="center"
+                android:layout_weight="1"
+                android:textSize="@dimen/text_16sp"/>
+
+
+            <ImageButton
+                android:id="@+id/ib_menu_option"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="0"
+                android:background="@color/transparent"
+                android:padding="@dimen/distance_8dp"
+
+                android:src="@drawable/ic_menu_option" />
+
+
+        </LinearLayout>
+    </androidx.appcompat.widget.Toolbar>
     <com.jcodecraeer.xrecyclerview.XRecyclerView
         android:id="@+id/rv_video"
         android:layout_width="match_parent"

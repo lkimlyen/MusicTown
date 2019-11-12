@@ -2,7 +2,7 @@ package com.demo.architect.domain;
 
 import android.util.Log;
 
-import com.demo.architect.data.model.BaseResponse;
+import com.demo.architect.data.model.BaseListResponse;
 import com.demo.architect.data.model.TrendingVideo;
 import com.demo.architect.data.repository.base.data.remote.DataRepository;
 
@@ -12,7 +12,7 @@ import io.reactivex.Observable;
 import io.reactivex.observers.DisposableObserver;
 
 
-public class GetTrandingVideoListUseCase extends BaseUseCase<BaseResponse<TrendingVideo.TrandingVideoRespond>> {
+public class GetTrandingVideoListUseCase extends BaseUseCase<BaseListResponse<TrendingVideo.TrandingVideoRespond>> {
     private static final String TAG = GetTrandingVideoListUseCase.class.getSimpleName();
     private final DataRepository remoteRepository;
 
@@ -21,17 +21,17 @@ public class GetTrandingVideoListUseCase extends BaseUseCase<BaseResponse<Trendi
     }
 
     @Override
-    protected Observable<BaseResponse<TrendingVideo.TrandingVideoRespond>> buildUseCaseObservable() {
+    protected Observable<BaseListResponse<TrendingVideo.TrandingVideoRespond>> buildUseCaseObservable() {
         int limit = ((RequestValue) requestValues).limit;
         int page  = ((RequestValue) requestValues).page;
         return remoteRepository.sendReqestGetTrandingVideo(limit, page);
     }
 
     @Override
-    protected DisposableObserver<BaseResponse<TrendingVideo.TrandingVideoRespond>> buildUseCaseSubscriber() {
-        return new DefaultObserver<BaseResponse<TrendingVideo.TrandingVideoRespond>>() {
+    protected DisposableObserver<BaseListResponse<TrendingVideo.TrandingVideoRespond>> buildUseCaseSubscriber() {
+        return new DefaultObserver<BaseListResponse<TrendingVideo.TrandingVideoRespond>>() {
             @Override
-            public void onNext(BaseResponse<TrendingVideo.TrandingVideoRespond> data) {
+            public void onNext(BaseListResponse<TrendingVideo.TrandingVideoRespond> data) {
                 Log.d(TAG, "onNext: " + String.valueOf(data));
                 if (useCaseCallback != null) {
                     List<TrendingVideo> result = data.getResults().getObjects().getRows();

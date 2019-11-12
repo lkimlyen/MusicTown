@@ -2,6 +2,7 @@ package com.demo.music.town.screen.home;
 
 
 import com.demo.architect.data.model.ArtistCategory;
+import com.demo.architect.data.model.TrendingVideoCategory;
 import com.demo.music.town.app.base.BasePresenter;
 import com.demo.music.town.app.base.BaseView;
 
@@ -18,9 +19,14 @@ public interface HomeContract {
 
         void displayArtistCategoryList(List<ArtistCategory> list);
 
+
+        void displayTrendingVideoCategoryList(List<TrendingVideoCategory> list, String displayType);
+
     }
 
     interface Presenter extends BasePresenter {
         void sendRequestGetArtistCategory();
+
+        void sendRequestGetTrendingCategory(String displayType);
     }
 }

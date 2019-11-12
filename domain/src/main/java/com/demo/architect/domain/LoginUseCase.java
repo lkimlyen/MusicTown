@@ -2,7 +2,7 @@ package com.demo.architect.domain;
 
 import android.util.Log;
 
-import com.demo.architect.data.model.BaseResponse;
+import com.demo.architect.data.model.BaseListResponse;
 import com.demo.architect.data.model.UserEntity;
 import com.demo.architect.data.repository.base.account.remote.AccountRepository;
 
@@ -10,7 +10,7 @@ import io.reactivex.Observable;
 import io.reactivex.observers.DisposableObserver;
 
 
-public class LoginUseCase extends BaseUseCase<BaseResponse<UserEntity>> {
+public class LoginUseCase extends BaseUseCase<BaseListResponse<UserEntity>> {
     private static final String TAG = LoginUseCase.class.getSimpleName();
     private final AccountRepository remoteRepository;
 
@@ -19,17 +19,17 @@ public class LoginUseCase extends BaseUseCase<BaseResponse<UserEntity>> {
     }
 
     @Override
-    protected Observable<BaseResponse<UserEntity>> buildUseCaseObservable() {
+    protected Observable<BaseListResponse<UserEntity>> buildUseCaseObservable() {
         String userName = ((RequestValue) requestValues).userName;
         String password = ((RequestValue) requestValues).password;
         return remoteRepository.login(userName, password);
     }
 
     @Override
-    protected DisposableObserver<BaseResponse<UserEntity>> buildUseCaseSubscriber() {
-        return new DefaultObserver<BaseResponse<UserEntity>>() {
+    protected DisposableObserver<BaseListResponse<UserEntity>> buildUseCaseSubscriber() {
+        return new DefaultObserver<BaseListResponse<UserEntity>>() {
             @Override
-            public void onNext(BaseResponse<UserEntity> data) {
+            public void onNext(BaseListResponse<UserEntity> data) {
                 Log.d(TAG, "onNext: " + String.valueOf(data));
                 if (useCaseCallback != null) {
                     UserEntity entity = data.getResults().getObjects();

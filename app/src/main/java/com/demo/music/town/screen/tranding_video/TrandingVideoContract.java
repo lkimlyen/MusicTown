@@ -24,5 +24,7 @@ public interface TrandingVideoContract {
 
     interface Presenter extends BasePresenter {
         void sendRequestGetTrandingVideoList(String displayType, int page);
+
+
     }
 }

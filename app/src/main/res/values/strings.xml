@@ -185,5 +185,6 @@
     <string name="text_err_connect_internet">No internet connection</string>
     <string name="text_download_option">Download Option</string>
     <string name="error_no_yt_link">Not a valid YouTube link!</string>
+    <string name="buffering_string">Buffering...</string>
 
 </resources>

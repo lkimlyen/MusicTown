@@ -1,6 +1,6 @@
 package com.demo.architect.data.repository.base.account.remote;
 
-import com.demo.architect.data.model.BaseResponse;
+import com.demo.architect.data.model.BaseListResponse;
 import com.demo.architect.data.model.UserEntity;
 
 import io.reactivex.ObservableEmitter;
@@ -18,9 +18,9 @@ public class AccountRepositoryImpl implements AccountRepository {
     }
 
 
-    private void handleUserLoginResponse(Call<BaseResponse<UserEntity>> call, ObservableEmitter<BaseResponse<UserEntity>> emitter) {
+    private void handleUserLoginResponse(Call<BaseListResponse<UserEntity>> call, ObservableEmitter<BaseListResponse<UserEntity>> emitter) {
         try {
-            BaseResponse<UserEntity> response = call.execute().body();
+            BaseListResponse<UserEntity> response = call.execute().body();
 
             if (!emitter.isDisposed()){
                 if (response != null) {
@@ -43,11 +43,11 @@ public class AccountRepositoryImpl implements AccountRepository {
     }
 
     @Override
-    public Observable<BaseResponse<UserEntity>> login( final String username,
-                                                      final String password) {
-        return Observable.create(new ObservableOnSubscribe<BaseResponse<UserEntity>>() {
+    public Observable<BaseListResponse<UserEntity>> login(final String username,
+                                                          final String password) {
+        return Observable.create(new ObservableOnSubscribe<BaseListResponse<UserEntity>>() {
             @Override
-            public void subscribe(ObservableEmitter<BaseResponse<UserEntity>> emitter) throws Exception {
+            public void subscribe(ObservableEmitter<BaseListResponse<UserEntity>> emitter) throws Exception {
                 handleUserLoginResponse(mRemoteApiInterface.login(
                         username, password), emitter);
             }

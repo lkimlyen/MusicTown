@@ -9,6 +9,7 @@ import com.demo.architect.data.model.TrendingVideo;
 import com.demo.architect.data.repository.base.local.LocalRepository;
 import com.demo.architect.domain.BaseUseCase;
 import com.demo.architect.domain.GetTrandingVideoListUseCase;
+import com.demo.architect.domain.GetVideoListByCategoryIdUseCase;
 import com.demo.music.town.R;
 import com.demo.music.town.app.CoreApplication;
 import com.demo.music.town.util.NetworkUtils;
@@ -25,15 +26,15 @@ public class TrandingVideoPresenter implements TrandingVideoContract.Presenter {
 
     private final String TAG = TrandingVideoPresenter.class.getName();
     private final TrandingVideoContract.View view;
-    private final GetTrandingVideoListUseCase getTrandingVideoListUseCase;
+    private final GetVideoListByCategoryIdUseCase getVideoListByCategoryIdUseCase;
     @Inject
     LocalRepository localRepository;
 
 
     @Inject
-    TrandingVideoPresenter(@NonNull TrandingVideoContract.View view, GetTrandingVideoListUseCase getTrandingVideoListUseCase) {
+    TrandingVideoPresenter(@NonNull TrandingVideoContract.View view, GetVideoListByCategoryIdUseCase getVideoListByCategoryIdUseCase) {
         this.view = view;
-        this.getTrandingVideoListUseCase = getTrandingVideoListUseCase;
+        this.getVideoListByCategoryIdUseCase = getVideoListByCategoryIdUseCase;
     }
 
     @Inject
@@ -54,18 +55,19 @@ public class TrandingVideoPresenter implements TrandingVideoContract.Presenter {
 
 
     @Override
-    public void sendRequestGetTrandingVideoList(String displayType, int page) {
+    public void sendRequestGetTrandingVideoList(String catgoryId, int page) {
         if (!NetworkUtils.isConnected(CoreApplication.getInstance())) {
             view.endLoadingList();
             view.showError(CoreApplication.getInstance().getString(R.string.text_err_connect_internet));
             return;
         }
-        getTrandingVideoListUseCase.executeIO(new GetTrandingVideoListUseCase.RequestValue(Constants.DEFAULT_LIMIT_PAGE, page),
+        String filter = "{\"trending_video_category_id\": \""+catgoryId+"\"}";
+        getVideoListByCategoryIdUseCase.executeIO(new GetVideoListByCategoryIdUseCase.RequestValue(filter,Constants.DEFAULT_LIMIT_PAGE, page),
                 new BaseUseCase.UseCaseCallback() {
                     @Override
                     public void onSuccess(Object successResponse) {
-                        if (successResponse instanceof GetTrandingVideoListUseCase.ResponseValue){
-                            List<TrendingVideo> list = ((GetTrandingVideoListUseCase.ResponseValue)successResponse).getResult();
+                        if (successResponse instanceof GetVideoListByCategoryIdUseCase.ResponseValue){
+                            List<TrendingVideo> list = ((GetVideoListByCategoryIdUseCase.ResponseValue)successResponse).getResult();
                             view.displayTrandingVideoList(list,page);
                             view.endLoadingList();
                         }
